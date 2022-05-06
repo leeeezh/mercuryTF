@@ -6,7 +6,7 @@ resource "aws_instance" "ec2Backend" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.pvt-backend.id
   security_groups  = [aws_security_group.block_tls.id]
-  user_data = "${file("install_dockerbackend.sh")}"
+  user_data = filebase64("install_dockerbackend.sh")
   
 
    tags = {
@@ -21,7 +21,7 @@ resource "aws_instance" "ec2webserver" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.pvt-backend.id
   security_groups  = [aws_security_group.block_tls.id]
-  user_data = "${file("install_dockerfrontend.sh")}"
+  user_data = filebase64("install_dockerfrontend.sh")
   
    tags = {
     Name = "PublicEC2Webserver"
