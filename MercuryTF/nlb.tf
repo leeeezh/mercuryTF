@@ -13,7 +13,7 @@ resource "aws_lb" "nlb" {
 #nlb add target group still not working
 resource "aws_lb_listener" "nlb_front_end" {
   load_balancer_arn = aws_lb.nlb.arn
-  port              = "443"
+  port              = "80"
   protocol          = "TCP"
   default_action {
     type             = "forward"
@@ -33,7 +33,7 @@ resource "aws_lb_target_group" "httpsTG" {
 
   health_check {
       
-      protocol = "HTTPS"
+      protocol = "TCP"
       healthy_threshold = 2
       interval = 30
   }
